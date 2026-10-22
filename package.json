@@ -1,0 +1,32 @@
+{
+  "name": "netmirror-android",
+  "version": "0.9.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "typecheck": "tsc --noEmit",
+    "test:contracts": "bash tools/test-contracts.sh"
+  },
+  "dependencies": {
+    "expo": "~54.0.0",
+    "expo-video": "~3.0.16",
+    "expo-status-bar": "~3.0.9",
+    "react": "19.1.0",
+    "react-native": "npm:react-native-tvos@0.81.5-0",
+    "@react-native-async-storage/async-storage": "2.2.0"
+  },
+  "devDependencies": {
+    "@react-native-tvos/config-tv": "^0.2.5",
+    "typescript": "~5.9.2",
+    "@types/react": "~19.1.10"
+  },
+  "expo": {
+    "install": {
+      "exclude": [
+        "react-native"
+      ]
+    }
+  }
+}
