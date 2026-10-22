@@ -1,0 +1,4 @@
+export type MediaItem={id:string;title:string;description:string;genre:string;year:number;poster:string;stream:string};
+export const catalog:MediaItem[]=[
+{id:'bunny',title:'Big Buck Bunny',description:'Open sample video for testing.',genre:'Animation',year:2008,poster:'https://storage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg',stream:'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'},
+{id:'sintel',title:'Sintel',description:'Open sample video for testing.',genre:'Fantasy',year:2010,poster:'https://storage.googleapis.com/gtv-videos-bucket/sample/images/Sintel.jpg',stream:'https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4'}];
