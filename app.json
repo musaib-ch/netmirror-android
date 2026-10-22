@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "NetMirror Android",
+    "slug": "netmirror-android-rebuild",
+    "version": "0.9.0",
+    "orientation": "default",
+    "userInterfaceStyle": "dark",
+    "android": {
+      "package": "com.netmirror.rebuild",
+      "permissions": []
+    },
+    "plugins": [
+      "@react-native-tvos/config-tv",
+      [
+        "expo-video",
+        {
+          "supportsPictureInPicture": true,
+          "supportsBackgroundPlayback": false
+        }
+      ]
+    ]
+  }
+}
