@@ -1,0 +1,63 @@
+name: Android debug APK builds
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  api-contract-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - run: bash tools/test-contracts.sh
+  android-phone:
+    needs: api-contract-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - run: npm install --no-audit --no-fund
+      - run: CI=1 npx expo prebuild --platform android --clean --non-interactive
+      - name: Build phone debug APK
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: netmirror-android-phone-debug-apk
+          path: android/app/build/outputs/apk/debug/*.apk
+  android-tv:
+    needs: api-contract-tests
+    runs-on: ubuntu-latest
+    env:
+      EXPO_TV: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - run: npm install --no-audit --no-fund
+      - run: CI=1 npx expo prebuild --platform android --clean --non-interactive
+      - name: Build TV debug APK
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: netmirror-android-tv-debug-apk
+          path: android/app/build/outputs/apk/debug/*.apk
